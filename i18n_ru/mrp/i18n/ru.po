@@ -80,7 +80,7 @@ msgstr "Бракованная продукция"
 #. module: mrp
 #: view:mrp.workcenter:0
 msgid "Mrp Workcenter"
-msgstr "Рабочий центр"
+msgstr "Рабочий центр исправленный"
 
 #. module: mrp
 #: model:ir.actions.act_window,name:mrp.mrp_routing_action
