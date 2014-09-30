@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <template id="tt_print_form_akt_rabot_document">
+              &lt;!DOCTYPE html&gt;
+                    <html>
+                        <head>
+                            <meta charset="utf-8"/>
+                            <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+                            <t t-if="o.state!='draft'">
+                                <title t-esc="'АКТ № ' + str(o.number_only) + ' от ' + str(o.akt_date)"/>
+                            </t>
+                            <t t-if="o.state=='draft'">
+                                <title t-esc="'Черновик акта выполненных работ'"></title>
+                            </t>
+
+                            <!-- подтягиваем общие стили -->
+                            <t t-call="tt_print_forms_common.tt_print_forms_common_styles_template" />
+                        </head>
+                        <body>
+                            <div class="page">
+                                <div style="text-align:center;  padding: 1cm;">
+                                    <t t-if="o.state!='draft'">
+                                        <span style="font-size: 17pt; font-weight: bold;" t-esc="'АКТ № ' + str(o.number_only) + ' от ' + str(o.akt_date)"/>
+                                    </t>
+                                    <t t-if="o.state=='draft'">
+                                        <span style="font-size: 17pt; font-weight: bold;" t-esc="'Черновик акта выполненных работ'"/>
+                                    </t>
+                                </div>
+                                <div>
+                                    <span style="font-weight: bold;">Исполнитель:</span>
+                                    <span style="" t-esc="o.get_details(o.company_id.partner_id)"/>
+                                </div>
+                                <div >
+                                    <span style="font-weight: bold;">Заказчик:</span>
+                                    <span style="" t-esc="o.get_details(o.partner_id) "/>
+                                </div>
+                                <div>
+                                    <table  class="main">
+                                        <thead>
+                                            <tr>
+                                                <td style="width: 7%;">№</td>
+                                                <td style="width: 43%;">Название товара</td>
+                                                <td style="width: 9%;">Единица изм.</td>
+                                                <td style="width: 9%;">Коли- чество</td>
+                                                <td style="width: 10%;">Цена</td>
+                                                <td>Сумма</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr t-foreach="o.invoice_line" t-as="l">
+                                                <td><span t-esc="l_index+1"/></td>
+                                                <td><span t-field="l.name"/></td>
+                                                <td><span t-field="l.uos_id.name"/></td>
+                                                <td><span t-field="l.quantity"/></td>
+                                                <td><span t-field="l.price_unit"/></td>
+                                                <td><span t-field="l.price_subtotal"/></td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="5" style="text-align:right;border: none;">Итого без НДС:</td>
+                                                <td><span style="" t-field="o.amount_untaxed"/></td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="5" style="text-align:right;border: none;">НДС:</td>
+                                                <td><span style="" t-field="o.amount_tax"/></td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="5" style="text-align:right;border: none;">Всего к оплате:</td>
+                                                <td><span style="" t-field="o.amount_total"/></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div>
+                                    <span style="font-weight: bold;">Всего оказано услуг на сумму:</span>
+                                    <span style="font-weight: bold;" t-field="o.price_in_words"></span>
+                                </div>
+                                <div>
+                                    <span>Вышеперечисленные услуги выполнены полностью и в срок. Заказчик претензий по объему,качеству и срокам оказания услуг не имеет.</span>
+                                </div>
+                                <div>
+                                    <table>
+                                        <tbody>
+                                            <tr>
+                                                <td colspan="2">
+                                                    <span style="font-weight: bold;">Исполнитель</span>
+                                                </td>
+                                                <td colspan="2">
+                                                    <span style="font-weight: bold;">Заказчик</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2">
+                                                    <span  t-field="o.company_id.partner_id.name_official_multi"/>
+                                                </td>
+                                                <td colspan="2">
+                                                    <span t-field="o.partner_id.name_official_multi"/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="4"><div style="height: 20mm"></div></td>
+                                            </tr>
+                                            <tr valign="top" style="padding-bottom: 15mm;padding-top: 20mm;">
+                                                <td>
+                                                    <div style="border-top: 1px solid; text-align:center;">
+                                                        <span>подпись</span>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div style="border-top: 1px solid; text-align:center;">
+                                                        <span>расшифровка подписи</span>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div style="border-top: 1px solid; text-align:center;"><span>подпись</span></div>
+                                                </td>
+                                                <td>
+                                                    <div style="border-top: 1px solid; text-align:center;"><span>расшифровка подписи</span></div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="4"><div style="height: 10mm"></div></td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2">
+                                                    <div style="text-align:center;"><span>М.П.</span></div>
+                                                </td>
+                                                <td colspan="2">
+                                                    <div style="text-align:center;"><span>М.П.</span></div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                       </body>
+              </html>
+        </template>
+    </data>
+</openerp>

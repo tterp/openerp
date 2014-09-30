@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="0">
+        <report auto="False"
+            id="report_account_invoice_akt_rabot_document"
+            model="account.invoice"
+            name="tt_print_form_akt_rabot_new.tt_print_form_akt_rabot_document"
+            string="Akt vypolnennykh rabot"
+            report_type="qweb-html"
+            file="tt_print_form_akt_rabot_new.tt_print_form_akt_rabot"
+        />
+
+        <report
+            id="akt_invoice_report"
+            string="Akt vypolnennykh rabot"
+            model="account.invoice"
+            report_type="qweb-pdf"
+            name="tt_print_form_akt_rabot_new.tt_print_form_akt_rabot_wrapper"
+        />
+
+    </data>
+</openerp>

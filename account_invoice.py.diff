@@ -1,0 +1,22 @@
+diff --git a/addons/account/account_invoice.py b/addons/account/account_invoice.py
+index 8195fd7..69cf6f2 100644
+--- a/addons/account/account_invoice.py
++++ b/addons/account/account_invoice.py
+@@ -735,6 +735,8 @@ class account_invoice(models.Model):
+         total = 0
+         total_currency = 0
+         for line in invoice_move_lines:
++            if isinstance(line,list):
++                line = line[0]
+             if self.currency_id != company_currency:
+                 currency = self.currency_id.with_context(date=self.date_invoice or fields.Date.context_today(self))
+                 line['currency_id'] = currency.id
+@@ -932,6 +934,8 @@ class account_invoice(models.Model):
+ 
+     @api.model
+     def line_get_convert(self, line, part, date):
++        if isinstance(line, list):
++            line = line[0]
+         return {
+             'date_maturity': line.get('date_maturity', False),
+             'partner_id': part,

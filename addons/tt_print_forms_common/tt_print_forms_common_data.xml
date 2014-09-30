@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="0">
+            <report auto="False"
+                id="tt_print_forms_common_styles"
+                model="account.invoice"
+                name="tt_print_forms_common.tt_print_forms_common_styles_template"
+                string="Akt vypolnennykh rabot"
+                report_type="qweb-html"
+                file="tt_print_forms_common.tt_print_forms_common_styles"
+        />
+
+    </data>
+</openerp>
