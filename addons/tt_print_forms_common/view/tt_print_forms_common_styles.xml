@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <template id="tt_print_forms_common_styles_template">
+              <style>
+
+                                table {
+                                    width: 100%;
+                                }
+
+                                table.main tbody tr td{
+                                    padding: 2mm;
+                                    border: 1px solid black;
+                                }
+
+                                table.main thead tr td {
+                                    padding: 2mm;
+                                    border: 1px solid black;
+                                    text-align: center;
+                                }
+
+                                body {
+                                    font: 14pt "DejaVu Sans1";
+                                }
+
+                                div {
+                                  padding: 5mm;
+                                }
+                                * {
+                                    /*
+                                      Свойства width и height включают в себя значения полей и границ, но не отступов (margin).
+                                    */
+                                    box-sizing: border-box;
+                                    -moz-box-sizing: border-box;
+                                }
+
+
+                                @page {
+                                    size: A4;
+                                    /*
+                                       Если margin = 0, то левый край страницы совпадает с  левым краем таблицы
+                                    */
+                                    margin: 0cm;
+                                }
+                                @media print {
+                                  @page
+                                        {
+                                           margin: 15mm;
+                                        }
+
+                                }
+
+                            </style>
+        </template>
+    </data>
+</openerp>
